@@ -60,4 +60,9 @@ public class Medalla {
 
     public Medalla() {
     }
+
+    public static void <K, T> K getTipoMedalla(T t) {
+        System.out.println("YIYIA");
+        return null;
+    }
 }

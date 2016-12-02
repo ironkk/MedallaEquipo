@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
     @RequestMapping("/atletas")
@@ -45,6 +47,16 @@ import java.util.List;
         public void deleteEquipo(@PathVariable Long id) {
             atletaRepository.delete(id);
         }
+
+
+    //Retornar todos los atletas agrupados por nacionalidad en un Map<String, List<Atleta>>
+    @GetMapping("/groupby/nacionalidad")
+    public Map<String, List<Atleta>> getAtletasGroupByNacionalidad(){
+        return atletaRepository
+                .findAll()
+                .parallelStream()
+                .collect(Collectors.groupingBy(Atleta::getNacionalidad));
+    }
 
 
     }
